@@ -4,7 +4,7 @@
 --]]
 
 --panel object
-local Panel = Combuctor:NewClass('Frame')
+local Panel = LibStub('Classy-1.0'):New('Frame')
 local _G = getfenv(0)
 local min = math.min
 local max = math.max

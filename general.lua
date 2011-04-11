@@ -128,9 +128,9 @@ local function ListButton_Set(self, set)
 	self.set = set
 
 	if set.icon then
-		getglobal(self.check:GetName() .. 'Text'):SetFormattedText('|T%s:%d|t %s', set.icon, 28, set.name)
+		_G[self.check:GetName() .. 'Text']:SetFormattedText('|T%s:%d|t %s', set.icon, 28, set.name)
 	else
-		getglobal(self.check:GetName() .. 'Text'):SetText(set.name)
+		_G[self.check:GetName() .. 'Text']:SetText(set.name)
 	end
 
 	if set.parent then
