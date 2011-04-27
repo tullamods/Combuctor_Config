@@ -3,7 +3,7 @@
 		This is a rush job, I should redo it later
 --]]
 
-local CombuctorSet = Combuctor:GetModule('Sets')
+local CombuctorSet = Combuctor('Sets')
 local L = LibStub("AceLocale-3.0"):GetLocale("Combuctor")
 local MAX_ITEMS = 13
 local height, offset = 26, 0
@@ -11,6 +11,10 @@ local selected = {}
 local items = {}
 local profile = Combuctor:GetProfile()
 local key = 'inventory'
+
+local sendMessage = function(msg, ...)
+	CombuctorSet:Send(msg, ...)
+end
 
 local function AddSet(name)
 	local info = Combuctor:GetProfile()[key]
@@ -22,7 +26,7 @@ local function AddSet(name)
 		end
 	end
 	table.insert(sets, name)
-	Combuctor:SendMessage('COMBUCTOR_CONFIG_SET_ADD', key, name)
+	sendMessage('COMBUCTOR_CONFIG_SET_ADD', key, name)
 end
 
 local function RemoveSet(name)
@@ -32,7 +36,7 @@ local function RemoveSet(name)
 	for i,set in pairs(sets) do
 		if set == name then
 			table.remove(sets, i)
-			Combuctor:SendMessage('COMBUCTOR_CONFIG_SET_REMOVE', key, name)
+			sendMessage('COMBUCTOR_CONFIG_SET_REMOVE', key, name)
 			break
 		end
 	end
@@ -50,7 +54,7 @@ local function AddSubSet(name, parent)
 					info.exclude[parent] = nil
 				end
 
-				Combuctor:SendMessage('COMBUCTOR_CONFIG_SUBSET_ADD', key, name, parent)
+				sendMessage('COMBUCTOR_CONFIG_SUBSET_ADD', key, name, parent)
 				break
 			end
 		end
@@ -71,7 +75,7 @@ local function RemoveSubSet(name, parent)
 	else
 		info.exclude[parent] = {name}
 	end
-	Combuctor:SendMessage('COMBUCTOR_CONFIG_SUBSET_REMOVE', key, name, parent)
+	sendMessage('COMBUCTOR_CONFIG_SUBSET_REMOVE', key, name, parent)
 end
 
 local function HasSet(name)
