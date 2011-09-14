@@ -1,17 +1,21 @@
 --[[
-	menu.lua
-		Code for the Dominos options panel
+	panel.lua
+		An options panel class
 --]]
 
---panel object
 local Panel = LibStub('Classy-1.0'):New('Frame')
-local _G = getfenv(0)
 local min = math.min
 local max = math.max
 
-function Panel:New(name, title, subtitle, icon, parent)
+local ADDON, Addon = ...
+Addon.Panel = Panel
+
+
+--[[ API ]]--
+
+function Panel:New(name, title, subtitle, icon, parent, sideTitle)
 	local f = self:Bind(CreateFrame('Frame', name, UIParent))
-	f.name = title
+	f.name = sideTitle or title
 	f.parent = parent
 	
 	local text = f:CreateFontString(nil, 'ARTWORK', 'GameFontNormalLarge')
@@ -36,49 +40,29 @@ function Panel:New(name, title, subtitle, icon, parent)
 	return f
 end
 
---basic slider
-do
-	local function Slider_OnMouseWheel(self, arg1)
-		local step = self:GetValueStep() * arg1
-		local value = self:GetValue()
-		local minVal, maxVal = self:GetMinMaxValues()
 
-		if step > 0 then
-			self:SetValue(min(value+step, maxVal))
-		else
-			self:SetValue(max(value+step, minVal))
-		end
-	end
+--[[ Widgets ]]--
 
-	function Panel:NewSlider(text, low, high, step)
-		local name = self:GetName() .. text
-		local f = CreateFrame('Slider', name, self, 'OptionsSliderTemplate')
-		f:SetScript('OnMouseWheel', Slider_OnMouseWheel)
-		f:SetMinMaxValues(low, high)
-		f:SetValueStep(step)
-		f:EnableMouseWheel(true)
-
-		_G[name .. 'Text']:SetText(text)
-		_G[name .. 'Low']:SetText('')
-		_G[name .. 'High']:SetText('')
-
-		local text = f:CreateFontString(nil, 'BACKGROUND', 'GameFontHighlightSmall')
-		text:SetPoint('LEFT', f, 'RIGHT', 7, 0)
-		f.valText = text
-
-		return f
-	end
-end
-
---check button
-function Panel:NewCheckButton(name)
+function Panel:NewCheckButton(name, tooltip)
 	local b = CreateFrame('CheckButton', self:GetName() .. name, self, 'InterfaceOptionsCheckButtonTemplate')
 	_G[b:GetName() .. 'Text']:SetText(name)
+
+  if tooltip then
+    b:SetScript('OnEnter', function()
+      GameTooltip:SetOwner(b, 'ANCHOR_RIGHT')
+      GameTooltip:SetText(tooltip)
+    end)
+
+    b:SetScript('OnLeave', function()
+      if GameTooltip:IsOwned(b) then
+        GameTooltip:Hide()
+      end
+    end)
+  end
 
 	return b
 end
 
---basic dropdown
 function Panel:NewDropdown(name)
 	local f = CreateFrame('Frame', self:GetName() .. name, self, 'UIDropDownMenuTemplate')
 
@@ -89,7 +73,6 @@ function Panel:NewDropdown(name)
 	return f
 end
 
---button
 function Panel:NewButton(name, width, height)
 	local b = CreateFrame('Button', self:GetName() .. name, self, 'UIPanelButtonTemplate')
 	b:SetText(name)
@@ -99,8 +82,36 @@ function Panel:NewButton(name, width, height)
 	return b
 end
 
---load up the options menu
+--basic slider
 do
-	local name, desc = select(2, GetAddOnInfo('Combuctor'))
-	Combuctor.Options = Panel:New('CombuctorOptions', name, desc)
+  local function Slider_OnMouseWheel(self, arg1)
+    local step = self:GetValueStep() * arg1
+    local value = self:GetValue()
+    local minVal, maxVal = self:GetMinMaxValues()
+
+    if step > 0 then
+      self:SetValue(min(value+step, maxVal))
+    else
+      self:SetValue(max(value+step, minVal))
+    end
+  end
+
+  function Panel:NewSlider(text, low, high, step)
+    local name = self:GetName() .. text
+    local f = CreateFrame('Slider', name, self, 'OptionsSliderTemplate')
+    f:SetScript('OnMouseWheel', Slider_OnMouseWheel)
+    f:SetMinMaxValues(low, high)
+    f:SetValueStep(step)
+    f:EnableMouseWheel(true)
+
+    _G[name .. 'Text']:SetText(text)
+    _G[name .. 'Low']:SetText('')
+    _G[name .. 'High']:SetText('')
+
+    local text = f:CreateFontString(nil, 'BACKGROUND', 'GameFontHighlightSmall')
+    text:SetPoint('LEFT', f, 'RIGHT', 7, 0)
+    f.valText = text
+
+    return f
+    end
 end
