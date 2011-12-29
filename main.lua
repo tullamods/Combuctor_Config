@@ -8,16 +8,8 @@ local ADDON, Addon = ...
 Addon.frame = 'inventory'
 
 local L = LibStub('AceLocale-3.0'):GetLocale('Combuctor')
-local panels = {}
-
-
---[[ Panel ]]--
-
 local Main = Addon.Panel:New('CombuctorOptions', 'Combuctor', L.OptionsSubtitle)
-Main:SetScript('OnShow', function()
-  InterfaceOptionsFrame_OpenToCategory(panels[1])
-  Main:Hide()
-end)
+local panels = {}
 
 
 --[[ Frame Selector ]]--
@@ -48,17 +40,30 @@ UIDropDownMenu_Initialize(drop, drop.Initialize)
 UIDropDownMenu_SetSelectedValue(drop, Addon.frame)
 
 
---[[ API ]]--
+--[[ Create Panels ]]--
 
 function Addon:NewPanel(name)
-  local panel = Addon.Panel:New('CombuctorOptions' .. name, 'Combuctor', L.OptionsSubtitle, nil, 'Combuctor', L[name])
-	panel:SetScript('OnShow', function()
-    drop:SetParent(panel)
-    drop:SetPoint('TOPLEFT', 6, -72)
-
-    panel:OnFrameChanged()
-  end)
-
-  tinsert(panels, panel)
-  return panel
+	local panel = Addon.Panel:New('CombuctorOptions' .. name, 'Combuctor', L.OptionsSubtitle, nil, 'Combuctor', L[name])
+	tinsert(panels, panel)
+	return panel
 end
+
+
+--[[ Display Panels ]]--
+
+hooksecurefunc('InterfaceOptionsList_DisplayPanel', function(target)
+	if target == Main then
+		InterfaceOptionsFrame_OpenToCategory(panels[1])
+  		Main:Hide()
+	else
+		for i, panel in ipairs(panels) do
+			if panel == target then
+				drop:SetParent(panel)
+				drop:SetPoint('TOPLEFT', 6, -72)
+
+				panel:OnFrameChanged()
+				break
+			end
+		end
+	end
+end)

@@ -1,4 +1,4 @@
-## Interface: 40200
+## Interface: 40300
 ## Title: |cff20ff20Combuctor Config|r
 ## Author: Tuller
 ## Notes: An options menu for Combuctor
