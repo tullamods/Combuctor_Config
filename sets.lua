@@ -31,7 +31,8 @@ local function AddSet(name)
 			return
 		end
 	end
-	table.insert(sets, name)
+	
+	tinsert(sets, name)
 	sendMessage('COMBUCTOR_CONFIG_SET_ADD', name)
 end
 
@@ -41,7 +42,7 @@ local function RemoveSet(name)
 
 	for i,set in pairs(sets) do
 		if set == name then
-			table.remove(sets, i)
+			tremove(sets, i)
 			sendMessage('COMBUCTOR_CONFIG_SET_REMOVE', name)
 			break
 		end
@@ -55,7 +56,7 @@ local function AddSubSet(name, parent)
 	if exclude then
 		for i,set in pairs(exclude) do
 			if set == name then
-				table.remove(exclude, i)
+				tremove(exclude, i)
 				if #exclude < 1 then
 					info.exclude[parent] = nil
 				end
@@ -77,7 +78,7 @@ local function RemoveSubSet(name, parent)
 				return
 			end
 		end
-		table.insert(exclude, name)
+		tinsert(exclude, name)
 	else
 		info.exclude[parent] = {name}
 	end
@@ -196,10 +197,10 @@ local function Panel_UpdateList(self)
 	local items = {}
 
 	for _,parentSet in Sets:GetParentSets() do
-		table.insert(items, parentSet)
+		tinsert(items, parentSet)
 		if selected[parentSet.name] then
 			for _,childSet in Sets:GetChildSets(parentSet.name) do
-				table.insert(items, childSet)
+				tinsert(items, childSet)
 			end
 		end
 	end

@@ -1,5 +1,5 @@
 ## Interface: 40300
-## Title: |cff20ff20Combuctor Config|r
+## Title: |cff5FC412Combuctor Config|r
 ## Author: Tuller
 ## Notes: An options menu for Combuctor
 ## Dependencies: Combuctor
