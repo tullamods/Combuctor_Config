@@ -24,6 +24,13 @@ Reversed:SetScript('OnClick', function()
   frame:SetLeftSideFilter(not frame:IsSideFilterOnLeft())
 end)
 
+local TipCounts = General:NewCheckButton(L.TipCounts, L.TipCountsTip)
+TipCounts:SetPoint('TOPLEFT', Reversed, 'BOTTOMLEFT', 0, -5)
+TipCounts:SetChecked(Combuctor:IsTipCountEnabled())
+TipCounts:SetScript('OnClick', function()
+  Combuctor:ToggleTipCounts()
+end)
+
 function General:OnFrameChanged()
   frame = Combuctor:GetFrame(Addon.frame)
 
