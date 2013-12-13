@@ -36,7 +36,6 @@ function Panel:New(name, title, subtitle, icon, parent, sideTitle)
 	subtext:SetText(subtitle)
 	
 	InterfaceOptions_AddCategory(f)
-
 	return f
 end
 
