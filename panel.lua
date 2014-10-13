@@ -3,13 +3,10 @@
 		An options panel class
 --]]
 
-local Panel = LibStub('Classy-1.0'):New('Frame')
+local ADDON, Addon = ...
+local Panel = Combuctor.NewClass(Addon, 'Panel', 'Frame')
 local min = math.min
 local max = math.max
-
-local ADDON, Addon = ...
-Addon.Panel = Panel
-
 
 --[[ API ]]--
 

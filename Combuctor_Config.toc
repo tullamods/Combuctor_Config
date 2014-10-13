@@ -1,4 +1,4 @@
-## Interface: 50400
+## Interface: 60000
 ## Title: |cff5FC412Combuctor Config|r
 ## Author: Tuller and Jaliborc (João Cardoso)
 ## Notes: An options menu for Combuctor
