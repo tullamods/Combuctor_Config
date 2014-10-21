@@ -17,7 +17,7 @@ local panels = {}
 local drop = Main:NewDropdown(L.Panel)
 function drop:Initialize()
   self:AddItem(L.Inventory, 'inventory')
-  self:AddItem(L.Bank, 'bank')
+  self:AddItem(BANK, 'bank')
 end
 
 function drop:AddItem(text, value)

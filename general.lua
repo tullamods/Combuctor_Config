@@ -25,7 +25,7 @@ Reversed:SetScript('OnClick', function()
 end)
 
 local anchor = Reversed
-for _, name in ipairs {'ItemsByQuality', 'UnusableItems', 'SetItems', 'QuestItems'} do
+for _, name in ipairs {'ItemsByQuality', 'NewItems', 'UnusableItems', 'SetItems', 'QuestItems'} do
     local button = General:NewCheckButton(L['Highlight' .. name])
     button:SetPoint('TOPLEFT', anchor, 'BOTTOMLEFT', 0, -5)
     button:SetChecked(not Combuctor:GetSetting('disable' .. name))
