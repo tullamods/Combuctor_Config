@@ -1,9 +1,10 @@
-## Interface: 60000
+## Interface: 60200
 ## Title: |cff5FC412Combuctor Config|r
 ## Author: Tuller and Jaliborc (João Cardoso)
 ## Notes: An options menu for Combuctor
 ## Dependencies: Combuctor
 ## LoadOnDemand: 1
+## Version: 6.1
 
 panel.lua
 main.lua
