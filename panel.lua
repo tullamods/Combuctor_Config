@@ -14,7 +14,7 @@ function Panel:New(name, title, subtitle, icon, parent, sideTitle)
 	local f = self:Bind(CreateFrame('Frame', name, UIParent))
 	f.name = sideTitle or title
 	f.parent = parent
-	
+
 	local text = f:CreateFontString(nil, 'ARTWORK', 'GameFontNormalLarge')
 	text:SetPoint('TOPLEFT', 16, -16)
 	if icon then
@@ -31,7 +31,7 @@ function Panel:New(name, title, subtitle, icon, parent, sideTitle)
 	subtext:SetJustifyH('LEFT')
 	subtext:SetJustifyV('TOP')
 	subtext:SetText(subtitle)
-	
+
 	InterfaceOptions_AddCategory(f)
 	return f
 end
@@ -71,9 +71,9 @@ end
 
 function Panel:NewButton(name, width, height)
 	local b = CreateFrame('Button', self:GetName() .. name, self, 'UIPanelButtonTemplate')
+
 	b:SetText(name)
-	b:SetWidth(width)
-	b:SetHeight(height or width)
+	b:SetSize(width, height or width)
 
 	return b
 end
@@ -101,8 +101,8 @@ do
     f:EnableMouseWheel(true)
 
     _G[name .. 'Text']:SetText(text)
-    _G[name .. 'Low']:SetText('')
-    _G[name .. 'High']:SetText('')
+    f.Low:SetText('')
+    f.High:SetText('')
 
     local text = f:CreateFontString(nil, 'BACKGROUND', 'GameFontHighlightSmall')
     text:SetPoint('LEFT', f, 'RIGHT', 7, 0)
