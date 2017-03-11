@@ -5,65 +5,38 @@
 
 
 local ADDON, Addon = ...
-Addon.frame = 'inventory'
+local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
+local FrameSelector = Combuctor.OptionsPanel.NewDropdown(UIParent, L.Frame)
 
-local L = LibStub('AceLocale-3.0'):GetLocale('Combuctor')
-local Main = Addon.Panel:New('CombuctorOptions', 'Combuctor', L.OptionsSubtitle)
-local panels = {}
-
-
---[[ Frame Selector ]]--
-
-local drop = Main:NewDropdown(L.Panel)
-function drop:Initialize()
-  self:AddItem(L.Inventory, 'inventory')
+function FrameSelector:Initialize()
+  self:AddItem(INVENTORY_TOOLTIP, 'inventory')
   self:AddItem(BANK, 'bank')
 end
 
-function drop:AddItem(text, value)
-  UIDropDownMenu_AddButton({
-    text = text,
-    func = self.Click,
-    checked = value == Addon.frame,
-    value = value,
-  })
+function FrameSelector:AddItem(text, value)
+	UIDropDownMenu_AddButton({
+    	text = text,
+    	func = self.Click,
+    	checked = value == Addon.frameID,
+    	value = value,
+  	})
 end
 
-function drop:Click()
-  Addon.frame = self.value
-  UIDropDownMenu_SetSelectedValue(drop, self.value)
-  drop:GetParent():OnFrameChanged(self.value)
+function FrameSelector:Click()
+	Addon.frameID = self.value
+	FrameSelector:GetParent():OnFrameChanged()
+	UIDropDownMenu_SetSelectedValue(FrameSelector, Addon.frameID)
 end
 
-UIDropDownMenu_SetWidth(drop, 110)
-UIDropDownMenu_Initialize(drop, drop.Initialize)
-UIDropDownMenu_SetSelectedValue(drop, Addon.frame)
+Addon.frameID = 'inventory'
+UIDropDownMenu_SetWidth(FrameSelector, 110)
+UIDropDownMenu_Initialize(FrameSelector, FrameSelector.Initialize)
+UIDropDownMenu_SetSelectedValue(FrameSelector, Addon.frameID)
 
-
---[[ Create Panels ]]--
-
-function Addon:NewPanel(name)
-	local panel = Addon.Panel:New('CombuctorOptions' .. name, 'Combuctor', L.OptionsSubtitle, nil, 'Combuctor', L[name])
-	tinsert(panels, panel)
-	return panel
-end
-
-
---[[ Display Panels ]]--
-
-hooksecurefunc('InterfaceOptionsList_DisplayPanel', function(target)
-	if target == Main then
-		InterfaceOptionsFrame_OpenToCategory(panels[1])
-  		Main:Hide()
-	else
-		for i, panel in ipairs(panels) do
-			if panel == target then
-				drop:SetParent(panel)
-				drop:SetPoint('TOPLEFT', 6, -72)
-
-				panel:OnFrameChanged()
-				break
-			end
-		end
+hooksecurefunc('InterfaceOptionsList_DisplayPanel', function(panel)
+	if getmetatable(panel) == Combuctor.OptionsPanel then
+		FrameSelector:SetParent(panel)
+		FrameSelector:SetPoint('TOPLEFT', 6, -72)
+		panel:OnFrameChanged()
 	end
 end)

@@ -4,24 +4,20 @@
 --]]
 
 local ADDON, Addon = ...
-local Panel = Combuctor.NewClass(Addon, 'Panel', 'Frame')
-local min = math.min
-local max = math.max
+local Panel = Combuctor:NewClass('OptionsPanel', 'Frame')
+Panel.ID = 1
 
---[[ API ]]--
 
-function Panel:New(name, title, subtitle, icon, parent, sideTitle)
-	local f = self:Bind(CreateFrame('Frame', name, UIParent))
-	f.name = sideTitle or title
+--[[ Constructor ]]--
+
+function Panel:New(title, subtitle, parent)
+	local f = self:Bind(CreateFrame('Frame', 'CombuctorOptions' .. self.ID, UIParent))
 	f.parent = parent
+  f.name = title
 
 	local text = f:CreateFontString(nil, 'ARTWORK', 'GameFontNormalLarge')
 	text:SetPoint('TOPLEFT', 16, -16)
-	if icon then
-		text:SetFormattedText('|T%s:%d|t %s', icon, 32, title)
-	else
-		text:SetText(title)
-	end
+	text:SetText(title)
 
 	local subtext = f:CreateFontString(nil, 'ARTWORK', 'GameFontHighlightSmall')
 	subtext:SetHeight(32)
@@ -32,6 +28,7 @@ function Panel:New(name, title, subtitle, icon, parent, sideTitle)
 	subtext:SetJustifyV('TOP')
 	subtext:SetText(subtitle)
 
+  self.ID = self.ID + 1
 	InterfaceOptions_AddCategory(f)
 	return f
 end
@@ -61,7 +58,6 @@ end
 
 function Panel:NewDropdown(name)
 	local f = CreateFrame('Frame', self:GetName() .. name, self, 'UIDropDownMenuTemplate')
-
 	local text = f:CreateFontString(nil, 'BACKGROUND', 'GameFontNormalSmall')
 	text:SetPoint('BOTTOMLEFT', f, 'TOPLEFT', 21, 0)
 	text:SetText(name)
@@ -71,9 +67,8 @@ end
 
 function Panel:NewButton(name, width, height)
 	local b = CreateFrame('Button', self:GetName() .. name, self, 'UIPanelButtonTemplate')
-
-	b:SetText(name)
 	b:SetSize(width, height or width)
+  b:SetText(name)
 
 	return b
 end

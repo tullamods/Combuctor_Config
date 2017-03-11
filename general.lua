@@ -3,50 +3,45 @@
 --]]
 
 local ADDON, Addon = ...
-local General = Addon:NewPanel('General')
-
-local L = LibStub('AceLocale-3.0'):GetLocale('Combuctor')
-local frame
+local L = LibStub('AceLocale-3.0'):GetLocale(ADDON)
+local General = Combuctor.OptionsPanel:New('Combuctor', L.GeneralDesc)
 
 local Managed = General:NewCheckButton(L.ActPanel, L.ActPanelTip)
 Managed:SetPoint('TOPLEFT', 15, -120)
 Managed:SetScript('OnClick', function()
-    if frame.sets.position then
-        frame:SavePosition(nil)
+    local profile = Combuctor.profile[Addon.frameID]
+    if profile.point then
+        profile.point = false
     else
-        frame:SavePosition(frame:GetPoint())
+        profile.point = frame:GetPoint()
     end
+
+    Combuctor:UpdateFrames()
 end)
 
-local Reversed = General:NewCheckButton(L.LeftFilters, L.LeftFiltersTip)
+local Reversed = General:NewCheckButton(L.LeftTabs, L.LeftTabsTip)
 Reversed:SetPoint('TOPLEFT', Managed, 'BOTTOMLEFT', 0, -5)
 Reversed:SetScript('OnClick', function()
-    frame:SetLeftSideFilter(not frame:IsSideFilterOnLeft())
+    local profile = Combuctor.profile[Addon.frameID]
+    profile.reversedTabs = not profile.reversedTabs
+    Combuctor:UpdateFrames()
 end)
 
 local anchor = Reversed
-for _, name in ipairs {'ItemsByQuality', 'NewItems', 'UnusableItems', 'SetItems', 'QuestItems'} do
-    local button = General:NewCheckButton(L['Highlight' .. name])
+for _, key in ipairs {'glowQuality', 'glowNew', 'glowQuest', 'glowSets', 'glowUnusable', 'tipCount'} do
+    local button = General:NewCheckButton(L[key:gsub('^.', strupper)])
     button:SetPoint('TOPLEFT', anchor, 'BOTTOMLEFT', 0, -5)
-    button:SetChecked(not Combuctor:GetSetting('disable' .. name))
+    button:SetChecked(Combuctor.sets[key])
     button:SetScript('OnClick', function()
-        Combuctor:ToggleSetting('disable' .. name)
+        Combuctor.sets[key] = not Combuctor.sets[key]
         Combuctor:UpdateFrames()
     end)
 
     anchor = button
 end
 
-local TipCounts = General:NewCheckButton(L.TipCounts, L.TipCountsTip)
-TipCounts:SetPoint('TOPLEFT', anchor, 'BOTTOMLEFT', 0, -5)
-TipCounts:SetChecked(Combuctor:IsTipCountEnabled())
-TipCounts:SetScript('OnClick', function()
-    Combuctor:ToggleTipCounts()
-end)
-
 function General:OnFrameChanged()
-    frame = Combuctor:GetFrame(Addon.frame)
-
-    Managed:SetChecked(not frame.sets.position)
-    Reversed:SetChecked(frame:IsSideFilterOnLeft())
+    local profile = Combuctor.profile[Addon.frameID]
+    Managed:SetChecked(not profile.point)
+    Reversed:SetChecked(profile.reversedTabs)
 end
