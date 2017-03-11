@@ -1,6 +1,6 @@
 --[[
 	Russian Localization
-		***
+		By ZZa
 --]]
 
 local ADDON, Addon = ...

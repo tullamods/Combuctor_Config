@@ -1,6 +1,6 @@
 --[[
     Spanish Localization
-		Credits/Blame: Phanx
+		By Phanx
 --]]
 
 local ADDON, Addon = ...

@@ -1,6 +1,6 @@
 --[[
 	French Localization
-		***
+		By Legrandseb2212
 --]]
 
 local ADDON, Addon = ...
@@ -21,8 +21,17 @@ L.FrameSettings = 'Options des Fenêtres'
 L.FrameSettingsDesc = 'Configuration des options spécifiques à une fenêtre de Bagnon'
 L.Frame = 'Fenêtre'
 L.Enabled = 'Activer'
---L.CharacterSpecific = 'Character Specific Settings'
---L.ExclusiveReagent = 'Separate Reagent Bank'
+L.LeftTabs = 'Afficher les Icons sur la gauche'
+L.ActPanel = 'Agir en tant que panneau standard'
+
+L.LeftTabsTip = [[
+S'il est activé, les onglets latéraux seront
+affichée sur le côté gauche du panneau.]]
+
+L.ActPanelTip = [[
+S'il est activé, ce panneau va automatiquement se positionner
+lui-même, faire comme les standards, comme |cffffffffSpellbook|r
+ou |cffffffffDungeon Finder|r, et ne sera pas mobile.]]
 
 L.BagFrame = 'Fenêtre du sac'
 L.Money = 'Affichage des revenus'

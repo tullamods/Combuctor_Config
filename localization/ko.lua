@@ -1,5 +1,6 @@
 ﻿--[[
-	Bagnon Config Localization: Korean
+	Korean Localization
+		By Bruteforce and 노분노씹새끼
 --]]
 
 local ADDON, Addon = ...
@@ -22,6 +23,11 @@ L.Frame = '창'
 L.Enabled = 'Bagnon 애드온 사용'
 L.CharacterSpecific = '캐릭터 개별 설정'
 L.ExclusiveReagent = '재료 은행 별도 표시'
+
+L.LeftTabs = '셋트를 왼쪽에 표시'
+L.ActPanel = '표준 패널로 지정'
+L.LeftTabsTip = [[체크하면 탭을 패널왼쪽에 표시합니다]]
+L.ActPanelTip = [[체크하면 자동으로 마법책이나 던전 찾기 처럼 표준 패널로 지정되고 이동이 불가능해집니다]]
 
 L.BagFrame = '가방 표시'
 L.Money = '소지금 표시'

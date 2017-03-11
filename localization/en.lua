@@ -1,11 +1,10 @@
 --[[
 	English Localization
 		This file must be present to have partial translations
-		***
 --]]
 
 local ADDON, Addon = ...
-local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'enUS', true, true)
+local L = LibStub('AceLocale-3.0'):NewLocale(ADDON, 'enUS', true)
 
 -- general
 L.GeneralDesc = 'General features that can be toggled depending on your preferences.'

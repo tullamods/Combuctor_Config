@@ -1,6 +1,6 @@
 --[[
-  Chinese Traditional Localization
-		***
+  Traditional Chinese Localization
+		By Irene Wang
 --]]
 
 local ADDON, Addon = ...

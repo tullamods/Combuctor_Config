@@ -1,6 +1,6 @@
 ﻿--[[
 	Chinese Simplified Localization
-		Credits: Diablohu, yleaf@cwdg, 狂飙@cwdg, 天下牧@萨格拉斯
+		By Diablohu, yleaf@cwdg, 狂飙@cwdg, 天下牧@萨格拉斯
 --]]
 
 local ADDON, Addon = ...
@@ -19,10 +19,16 @@ L.DisplayBlizzard = '禁用的背包使用暴雪默认框体'
 -- frame
 L.FrameSettings = '显示设置'
 L.FrameSettingsDesc = '窗口显示设置'
---L.Frame = 'Frame'
---L.Enabled = 'Enable Frame'
---L.CharacterSpecific = 'Character Specific Settings'
---L.ExclusiveReagent = 'Separate Reagent Bank'
+L.LeftTabs = '将物品分类栏显示在窗体左侧'
+L.ActPanel = '作为标准面板运作'
+
+L.LeftTabsTip = [[
+若勾选，物品分类栏将显示在此面板左侧。]]
+
+L.ActPanelTip = [[
+若勾选，则此面板将自动定位在普通面板所定位的地方，
+如|cffffffff法术书和技能|r界面或|cffffffff地下城查找器|r界面
+默认出现的地点，且不可被移动。]]
 
 L.BagFrame = '启用背包按钮'
 L.Money = '启用货币窗口'

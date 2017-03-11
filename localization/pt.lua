@@ -1,6 +1,6 @@
 --[[
-	Brasilian Portuguese Localization
-		***
+	Portuguese Translations
+		By Jaliborc and madcampos
 --]]
 
 local ADDON, Addon = ...
@@ -21,13 +21,18 @@ L.FrameSettings = 'Preferências de Janela'
 L.FrameSettingsDesc = 'Configuração específica para uma janela de Bagnon'
 L.Frame = 'Janela'
 L.Enabled = 'Ativar'
---L.CharacterSpecific = 'Character Specific Settings'
+L.CharacterSpecific = 'Preferências por Personagem'
 --L.ExclusiveReagent = 'Separate Reagent Bank'
+L.ActPanel = 'Comportar como painel padrão'
+
+L.ActPanelTip = [[
+Se ativado, este painel será imovível e se posicionará
+automaticamente da mesma forma que os painéis padrão,como
+o |cffffffffGrimório|r ou o |cffffffffLocalizador de Masmorras|r.]]
 
 L.BagFrame = 'Lista de sacos'
 L.Money = 'Dinheiro'
-L.Broker = 'DataBroker'
---L.Sort = 'Sort Button'
+L.Sort = 'Botão de Ordenação'
 L.Search = 'Botão da pesquisa'
 L.Options = 'Botão da configração'
 
@@ -70,11 +75,11 @@ L.CloseVendor = 'quando abandonar um vendedor'
 -- colors
 L.ColorSettings = 'Preferências de Cor'
 L.ColorSettingsDesc = 'Preferências de cor para os compartimentos para itens'
---L.GlowQuality = 'Highlight Items by Quality' 
-L.GlowNew = 'Realçar itens por qualidade' 
+L.GlowQuality = 'Realçar itens por qualidade' 
+L.GlowNew = 'Realçar itens novos' 
 L.GlowQuest = 'Realçar itens de missão'
 L.GlowUnusable = 'Realçar itens inutilizáveis'
---L.GlowSets = 'Highlight Equipment Set Items'
+L.GlowSets = 'Realçar conjuntos de equipamento'
 L.ColorSlots = 'Colorir os espaços por tipo de saco'
 
 L.NormalColor = 'Espaços normais'
@@ -89,3 +94,9 @@ L.TackleColor = 'Caixas de pesca'
 L.RefrigeColor = 'Bolsas de cozinhar'
 --L.ReagentColor = 'Reagent Bank Color'
 L.GlowAlpha = 'Quantidade de brilho para realçar'
+
+-- rules
+L.LeftTabs = 'Mostrar conjuntos à esquerda'
+L.LeftTabsTip = [[
+Se ativado, as abas laterais serão
+exibidas do lado esquerdo.]]

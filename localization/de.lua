@@ -1,6 +1,6 @@
 --[[
 	German Localization
-		Credits/Blame: Phanx
+		By Phanx
 --]]
 
 local ADDON, Addon = ...
@@ -23,6 +23,16 @@ L.Frame = 'Fenster'
 L.Enabled = 'Aktiviert'
 L.CharacterSpecific = 'Charakterspezifische Einstellungen'
 L.ExclusiveReagent = 'Getrenntes Materiallager'
+L.LeftTabs = 'Sets links anzeigen'
+L.ActPanel = 'Als Standardfenster verhalten'
+
+L.LeftTabsTip = [[
+Wenn aktiviert, werden die seitlichen Reiter
+ auf der linken Seite des Fensters angezeigt.]]
+
+L.ActPanelTip = [[
+Wenn aktiviert, wird dieses Fenster sich automatisch wie die standardmäßigen Fenster, wie das |cffffffffZauberbuch|r
+oder der |cffffffffDungeonbrowser|r, positionieren.]]
 
 L.BagFrame = 'Taschenschaltflächen'
 L.Money = 'Gold'
