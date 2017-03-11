@@ -10,12 +10,7 @@ local Managed = General:NewCheckButton(L.ActPanel, L.ActPanelTip)
 Managed:SetPoint('TOPLEFT', 15, -120)
 Managed:SetScript('OnClick', function()
     local profile = Combuctor.profile[Addon.frameID]
-    if profile.point then
-        profile.point = false
-    else
-        profile.point = frame:GetPoint()
-    end
-
+    profile.managed = not profile.managed
     Combuctor:UpdateFrames()
 end)
 
@@ -42,6 +37,6 @@ end
 
 function General:OnFrameChanged()
     local profile = Combuctor.profile[Addon.frameID]
-    Managed:SetChecked(not profile.point)
     Reversed:SetChecked(profile.reversedTabs)
+    Managed:SetChecked(profile.managed)
 end
