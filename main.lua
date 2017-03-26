@@ -1,5 +1,6 @@
 --[[
-	Sets up the configuration panels specifics for Combuctor
+	main.lua
+		Sets up the configuration panels specifics for Combuctor
 --]]
 
 local CONFIG, Config = ...
